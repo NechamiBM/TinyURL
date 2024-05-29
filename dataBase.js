@@ -1,6 +1,8 @@
 import mongoose from "mongoose"
+import dotenv from 'dotenv'
 
-const uri = "mongodb+srv://n7110315:pY6nXx7sKnkGo6aN@cluster0.hgiep68.mongodb.net/TinyUrlDB?retryWrites=true&w=majority&appName=Cluster0"
+dotenv.config()
+const uri = process.env.DB_URI
 
 const connectDB = async () => {
     await mongoose.connect(uri)
@@ -15,7 +17,7 @@ mongoose.set('toJSON', {
 })
 
 database.on('error', (error) => {
-    console.log(error)
+    console.error("ERROR: " + error)
 })
 
 database.once('connected', () => {

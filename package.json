@@ -5,19 +5,23 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "dev": "nodemon -r index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NechamiBM/TinyURL.git"
   },
-  "author": "",
+  "author": "NechamiBM",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/NechamiBM/TinyURL/issues"
   },
   "homepage": "https://github.com/NechamiBM/TinyURL#readme",
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongoose": "^8.4.0"
   }
