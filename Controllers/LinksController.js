@@ -1,5 +1,4 @@
 import LinkModel from "../Models/LinkModel.js"
-
 const LinksController = {
   getList: async (req, res) => {
     try {
@@ -13,9 +12,17 @@ const LinksController = {
   getById: async (req, res) => {
     try {
       const link = await LinkModel.findById(req.params.id)
-      res.json(link)
+      if (!link)
+        return res.status(404).json({ message: "Link not found" })
+      const click = {
+        insertedAt: new Date(),
+        ipAddress: req.ip
+      };
+      link.clicks.push(click);
+      await link.save();
+      res.redirect(link.originalUrl);
     } catch (e) {
-      res.status(400).json({ message: e.message })
+      res.status(400).json({ message: e.message });
     }
   },
 
@@ -32,7 +39,7 @@ const LinksController = {
   update: async (req, res) => {
     const { id } = req.params
     try {
-      const updatedLink = await LinkModel.findByIdAndUpdate(id, req.body, { new: true, })
+      const updatedLink = await LinkModel.findByIdAndUpdate(id, req.body, { new: true })
       res.json(updatedLink)
     } catch (e) {
       res.status(400).json({ message: e.message })
