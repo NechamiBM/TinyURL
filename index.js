@@ -14,10 +14,16 @@ app.use('/links', LinksRouter)
 
 connectDB()
 
-const port = 5000
+const port = process.env.PORT || 5555
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
+})
+
+app.get('/:id', (req, res) => {
+  const query = new URLSearchParams(req.query).toString()
+  const redirectUrl = `/links/${req.params.id}${query ? `?${query}` : ''}`
+  res.redirect(redirectUrl)
 })
 
 app.listen(port, () => {

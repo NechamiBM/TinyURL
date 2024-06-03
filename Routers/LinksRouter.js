@@ -8,5 +8,6 @@ LinksRouter.get("/:id", LinksController.getById)
 LinksRouter.post("/", LinksController.add)
 LinksRouter.put("/:id", LinksController.update)
 LinksRouter.delete("/:id", LinksController.delete)
+LinksRouter.get("/:id/clicks", LinksController.getClickInfoById)
 
 export default LinksRouter
